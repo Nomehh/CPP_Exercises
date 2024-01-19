@@ -2,12 +2,17 @@
 
 #include <string>
 
-class Person
+class Person //private by default
 {
-public:
-    std::string first_name;
-    std::string surname;
-    std::string toString() {
-        return first_name + " " + surname;
-    }
+    private:
+        std::string _firstname;
+        std::string _surname;
+       
+    public:
+        Person(std::string first_name, std::string surname)
+        : _firstname { first_name }, _surname { surname } 
+        {}
+        std::string toString(); 
+        std::string get_firstName();
+        std::string get_surname();
 };
