@@ -70,6 +70,13 @@
     "fstream": "cpp",
     "chrono": "cpp",
     "ratio": "cpp",
-    "thread": "cpp"
-  }
+    "thread": "cpp",
+    "charconv": "cpp",
+    "format": "cpp",
+    "semaphore": "cpp",
+    "span": "cpp",
+    "stop_token": "cpp",
+    "variant": "cpp"
+  },
+  "cmake.configureOnOpen": true
 }

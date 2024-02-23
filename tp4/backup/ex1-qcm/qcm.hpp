@@ -48,4 +48,4 @@
 #define ANSWER_11 true
 
 // Il faut toujours penser à appeler "delete" sur les pointeurs observants.
-#define ANSWER_12 false // oups
+#define ANSWER_12 false
