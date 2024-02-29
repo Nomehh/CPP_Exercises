@@ -26,11 +26,11 @@ void print_usage()
     std::cout << "\tq                                       : Ferme le programme" << std::endl;
 }
 
-std::deque<std::string> parse_words(const std::string& command)
+std::deque<std::string> parse_words(const std::string &command)
 {
-    auto words = std::deque<std::string> {};
+    auto words = std::deque<std::string>{};
 
-    auto str = std::stringstream { command };
+    auto str = std::stringstream{command};
     while (str.good())
     {
         str >> words.emplace_back();
@@ -39,7 +39,7 @@ std::deque<std::string> parse_words(const std::string& command)
     return words;
 }
 
-std::string pop_next(std::deque<std::string>& words)
+std::string pop_next(std::deque<std::string> &words)
 {
     if (words.empty())
     {
@@ -53,14 +53,15 @@ std::string pop_next(std::deque<std::string>& words)
     }
 }
 
-bool is_valid_name(const std::string& name)
+bool is_valid_name(const std::string &name)
 {
-    return !name.empty() && std::all_of(name.begin(), name.end(), [](char c) { return std::isalnum(c); });
+    return !name.empty() && std::all_of(name.begin(), name.end(), [](char c)
+                                        { return std::isalnum(c); });
 }
 
-std::vector<std::string> consume_names(std::deque<std::string>& words)
+std::vector<std::string> consume_names(std::deque<std::string> &words)
 {
-    auto names = std::vector<std::string> {};
+    auto names = std::vector<std::string>{};
 
     while (!words.empty())
     {
@@ -77,15 +78,15 @@ std::vector<std::string> consume_names(std::deque<std::string>& words)
 
 int main()
 {
-    auto data             = ProgramData {};
-    auto materials_buffer = std::vector<const Material*> {};
-    auto recipes_buffer   = std::vector<const Recipe*> {};
+    auto data = ProgramData{};
+    auto materials_buffer = std::vector<const Material *>{};
+    auto recipes_buffer = std::vector<const Recipe *>{};
 
     while (true)
     {
         std::cout << "Entrez une commande :" << std::endl;
 
-        auto command = std::string {};
+        auto command = std::string{};
         while (command.empty())
         {
             std::getline(std::cin, command);
@@ -130,7 +131,7 @@ int main()
             materials_buffer.clear();
             data.get_materials(materials_buffer);
 
-            for (const auto* m : materials_buffer)
+            for (const auto *m : materials_buffer)
             {
                 std::cout << *m << std::endl;
             }
@@ -181,7 +182,7 @@ int main()
             recipes_buffer.clear();
             data.collect_doable_recipes(recipes_buffer);
 
-            for (const auto* r : recipes_buffer)
+            for (const auto *r : recipes_buffer)
             {
                 std::cout << *r << std::endl;
             }
@@ -189,7 +190,7 @@ int main()
         else if (action == "p")
         {
             auto arg = pop_next(words);
-            auto id  = std::atoi(arg.c_str());
+            auto id = std::atoi(arg.c_str());
             if (id <= 0)
             {
                 std::cerr << "'" << arg << "' is not a valid identifier" << std::endl;
@@ -215,7 +216,7 @@ int main()
             {
                 std::cerr << "Unable to produce '" << *result.recipe
                           << "' without the following materials :" << std::endl;
-                for (const auto& m : result.missing_materials)
+                for (const auto &m : result.missing_materials)
                 {
                     std::cerr << m << std::endl;
                 }
