@@ -1,4 +1,6 @@
+#include <functional>
 #include <iostream>
+#include <map>
 #include <memory>
 #include <sstream>
 #include <string>
@@ -22,16 +24,27 @@ public:
 class Factory
 {
 public:
-    // using Builder = ...;
+    Factory()     = default;
+    using Builder = std::function<std::unique_ptr<Entity>()>;
 
-    template <typename TDerivedEntity>
-    void register_entity()
-    {}
+    template <typename TDerivedEntity, typename... Args>
+    void register_entity(const std::string& id, const Args&... params)
+    {
+        _builders[id] = [params...]() { return std::make_unique<TDerivedEntity>(params...); };
+    }
 
-    std::unique_ptr<Entity> build(const std::string& id) const { return nullptr; }
+    std::unique_ptr<Entity> build(const std::string& id) const
+    {
+        auto it = _builders.find(id);
+        if (it != _builders.end())
+        {
+            return it->second();
+        }
+        return nullptr;
+    }
 
 private:
-    // ...
+    std::map<std::string, Builder> _builders;
 };
 
 class Object : public Entity
@@ -91,7 +104,14 @@ private:
 int main()
 {
     Factory factory;
-    // factory.register_entity<Object>("Object");
+    factory.register_entity<Object>("Object");
+    factory.register_entity<Tree>("Tree");
+    factory.register_entity<Person>("Person", "Jean");
+    factory.register_entity<Animal>("Dog", "doggo");
+
+    Person jyt("Jean-Yves Thibon");
+    factory.register_entity<House>("House", std::ref(jyt));
+    jyt.set_name("Picsou");
 
     std::vector<std::unique_ptr<Entity>> entities;
 
