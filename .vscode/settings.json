@@ -88,7 +88,6 @@
         "xlocbuf": "cpp",
         "xlocmes": "cpp",
         "complex": "cpp",
-        "codecvt": "cpp",
-        "shared_mutex": "cpp"
+        "codecvt": "cpp"
     }
 }
