@@ -28,5 +28,4 @@ int main()
 
     const Luma luma_from_rgba = convert<Luma, RGBA>(rgba);
     assert(luma_from_rgba.gray == image_lib::rgb_to_grayscale(rgba.r, rgba.g, rgba.b));
-
 }
