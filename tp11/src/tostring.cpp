@@ -12,6 +12,20 @@ auto to_string(const T& data)
     return ss.str();
 }
 
+auto to_string(const std::string& data)
+{
+    std::stringstream ss;
+    ss << "<" << data << ">";
+    return ss.str();
+}
+
+auto to_string(const char* data)
+{
+    std::stringstream ss;
+    ss << "<" << data << ">";
+    return ss.str();
+}
+
 class Empty
 {};
 
@@ -39,7 +53,8 @@ class Both : public Streamable, public Convertible
 {};
 
 template <typename T>
-void print_test(std::string type, T&& value) {
+void print_test(std::string type, T&& value)
+{
     std::cout << type << std::endl;
     std::cout << "** Error: value is not a std::string" << std::endl;
 }
