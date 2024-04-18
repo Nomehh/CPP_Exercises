@@ -15,14 +15,14 @@ auto to_string(const T& data)
 auto to_string(const std::string& data)
 {
     std::stringstream ss;
-    ss << "<" << data << ">";
+    ss << data;
     return ss.str();
 }
 
 auto to_string(const char* data)
 {
     std::stringstream ss;
-    ss << "<" << data << ">";
+    ss << data;
     return ss.str();
 }
 
